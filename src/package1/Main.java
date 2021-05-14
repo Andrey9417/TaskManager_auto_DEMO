@@ -56,6 +56,12 @@ public class Main {
 
     private static void printMainMenu() {
 
+        System.out.println("### Main menu");
+        System.out.println("Type \'1\' to use showTask");
+        System.out.println("Type \'2\' to use editTask");
+        System.out.println("Type \'3\' to use addTask");
+        System.out.println("Type \'4\' to use deleteTask");
+        System.out.println("Type \'q\' to exit");
         //Тут вывод строк главного меню с вариантами действий
     }
 }

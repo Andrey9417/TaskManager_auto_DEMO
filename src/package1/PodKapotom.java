@@ -21,7 +21,8 @@ public class PodKapotom {
     Scanner scan = new Scanner(System.in);
 
     public void showTask(){
-        System.out.println("choose");
+        System.out.println("\n\nЗапущен метод showTask");
+        System.out.println("type \'q\'");
         String str = scan.nextLine();
         if (str.equals("q")){
 
@@ -65,7 +66,8 @@ public class PodKapotom {
     }
 
     public void editTask(){
-        System.out.println("choose");
+        System.out.println("\n\nЗапущен метод editTask");
+        System.out.println("type \'q\'");
         String str = scan.nextLine();
         if (str.equals("q")){
 
@@ -78,7 +80,8 @@ public class PodKapotom {
     }
 
     public void addTask(){
-        System.out.println("choose");
+        System.out.println("\n\nЗапущен метод addTask");
+        System.out.println("type \'q\'");
         String str = scan.nextLine();
         if (str.equals("q")){
 
@@ -92,7 +95,8 @@ public class PodKapotom {
     }
 
     public void deleteTask(){
-        System.out.println("choose");
+        System.out.println("\n\nЗапущен метод deleteTask");
+        System.out.println("type \'q\'");
         String str = scan.nextLine();
         if (str.equals("q")){
 
