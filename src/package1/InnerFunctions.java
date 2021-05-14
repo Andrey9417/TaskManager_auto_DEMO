@@ -12,9 +12,9 @@ public class InnerFunctions {
 
     public void loadFromFile(){
 
-        String fileName = "C:\\Users\\USER\\IdeaProjects\\java_auto\\src\\package_1\\Train\\qweqwe1.txt";
+        String fileName = "qweqwe1.txt";
 
-        try (Scanner sc =new Scanner(new File(fileName))){
+        try (Scanner sc =new Scanner(new File("src/package1/qweqwe1.txt"))){
             while(sc.hasNextLine()){
                 String str=sc.nextLine();
                 String[] arr = str.split(" ");
