@@ -6,7 +6,9 @@ public class PodKapotom {
     private InnerFunctions functions;
 
     public PodKapotom(InnerFunctions functions) {
+
         this.functions = functions;
+        //functions.loadFromFile();
     }
 
     /* Тут еще надо добавить:
@@ -14,96 +16,52 @@ public class PodKapotom {
     * запись в фаил и считку с фаила;
     *
     * объявить коллекцию для хранения данных
-    *
-    *
-    *
     * */
     Scanner scan = new Scanner(System.in);
 
     public void showTask(){
         System.out.println("\n\nЗапущен метод showTask");
-        System.out.println("type \'q\'");
-        String str = scan.nextLine();
-        if (str.equals("q")){
-
-            functions.loadFromFile();
-        }
-        /*
-        System.out.println("choose");
-        String str = scan.nextLine();
-        // тут тоже сделать ввод в цикле, чтоб можно было ошибочные вводы делать
-        switch(str){
-            case "1":
-            {
-                System.out.println(1);
-                // вызов метода: выводится ближайший по времени таск
-                break;
-            }
-            case "2":
-            {
-                System.out.println(2);
-                // вызов метода: выводятся таски на сегодня
-                break;
-            }
-            case "3":
-            {
-                System.out.println(3);
-                // вызов метода: выводятся все таски
-                break;
-            }
-            case "0":
-            {
-                System.out.println(0);
-                break;
-            }
-            default:
-            {
-                System.out.println("wrong");
+        System.out.println("type:\n 1 for next task;\n 2 for tasks for today;" +
+                "\n 3 for all tasks;\n 0 - return to main menu");
+        cycle:
+        while( true){
+            String str = scan.nextLine();
+            switch (str){
+                case "1": {
+                    functions.printNextTask();
+                    break cycle;
+                }
+                case "2": {
+                    functions.printTasksForToday();
+                    break cycle;
+                }
+                case "3": {
+                    functions.printAllTasks();
+                    break cycle;
+                }
+                case "0": {
+                    break cycle;
+                }
+                default: {
+                    System.out.println("wrong");
+                }
             }
         }
-         */
-
     }
 
     public void editTask(){
         System.out.println("\n\nЗапущен метод editTask");
-        System.out.println("type \'q\'");
-        String str = scan.nextLine();
-        if (str.equals("q")){
-
-            functions.loadFromFile();
-        }
-        // "введите название таска"  (можно тоже в цикле чтоб было несколько попыток)
-        // "хотите изменить дату?" y/n
-        // "хотите изменить время?" y/n
-        // "хотите изменить название?" y/n
+        functions.editTask();
     }
 
     public void addTask(){
         System.out.println("\n\nЗапущен метод addTask");
-        System.out.println("type \'q\'");
-        String str = scan.nextLine();
-        if (str.equals("q")){
+        functions.addTask();
 
-            functions.loadFromFile();
-        }
-        // введите название таска
-        // введите дату таска
-        // введите время таска
-        // тут можно проверить что такой таск уже возможно есть в списке и сказать об этом
-        // плюс можно подсказать, нет ли уже тасков назначенных на это время
     }
 
     public void deleteTask(){
         System.out.println("\n\nЗапущен метод deleteTask");
-        System.out.println("type \'q\'");
-        String str = scan.nextLine();
-        if (str.equals("q")){
-
-            functions.loadFromFile();
-        }
-        // "введите название таска"
-        // "вы действительно хотите удалить данный таск?" (вывести таск на экран)  y/n
-
+        functions.deleteTask();
     }
 }
