@@ -20,7 +20,7 @@ public class InnerFunctions {
                 String[] arr = str.split(" ");
                 String name = arr[0];
                 int date = Integer.parseInt(arr[1]);
-                int time = Integer.parseInt(arr[1]);
+                int time = Integer.parseInt(arr[2]);
                 listOfTasks.add(new Task(name, date, time));
             }
         } catch (FileNotFoundException e) {
