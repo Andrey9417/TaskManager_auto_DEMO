@@ -8,25 +8,19 @@ public class PodKapotom {
     public PodKapotom(InnerFunctions functions) {
 
         this.functions = functions;
-        //functions.loadFromFile();
+        functions.loadFromFile();
     }
 
-    /* Тут еще надо добавить:
-    *
-    * запись в фаил и считку с фаила;
-    *
-    * объявить коллекцию для хранения данных
-    * */
     Scanner scan = new Scanner(System.in);
 
-    public void showTask(){
+    public void showTask() {
         System.out.println("\n\nЗапущен метод showTask");
         System.out.println("type:\n 1 for next task;\n 2 for tasks for today;" +
                 "\n 3 for all tasks;\n 0 - return to main menu");
         cycle:
-        while( true){
+        while (true) {
             String str = scan.nextLine();
-            switch (str){
+            switch (str) {
                 case "1": {
                     functions.printNextTask();
                     break cycle;
@@ -49,18 +43,18 @@ public class PodKapotom {
         }
     }
 
-    public void editTask(){
+    public void editTask() {
         System.out.println("\n\nЗапущен метод editTask");
         functions.editTask();
     }
 
-    public void addTask(){
+    public void addTask() {
         System.out.println("\n\nЗапущен метод addTask");
         functions.addTask();
 
     }
 
-    public void deleteTask(){
+    public void deleteTask() {
         System.out.println("\n\nЗапущен метод deleteTask");
         functions.deleteTask();
     }

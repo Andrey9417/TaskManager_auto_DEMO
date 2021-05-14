@@ -1,68 +1,194 @@
 package package1;
 
+
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
 
 public class InnerFunctions {
 
     private List<Task> listOfTasks = new LinkedList<>();
+    private Scanner scan = new Scanner(System.in);
 
-    public void loadFromFile(){
+    public void loadFromFile() {
 
         listOfTasks.clear();
-        try (Scanner sc =new Scanner(new File("src/package1/qweqwe1.txt"))){
-            while(sc.hasNextLine()){
-                String str=sc.nextLine();
+        try (Scanner sc = new Scanner(new File("src/package1/qweqwe1.txt"))) {
+            while (sc.hasNextLine()) {
+                String str = sc.nextLine();
                 String[] arr = str.split(" ");
-                String name = arr[0];
-                int date = Integer.parseInt(arr[1]);
-                int time = Integer.parseInt(arr[2]);
-                listOfTasks.add(new Task(name, date, time));
+
+                // месяц день часы минуты name
+                int month = Integer.parseInt(arr[0]);
+                int day = Integer.parseInt(arr[1]);
+                int hour = Integer.parseInt(arr[2]);
+                int minute = Integer.parseInt(arr[3]);
+                String info = sc.nextLine();
+
+                listOfTasks.add(new Task(info, new GregorianCalendar(2021, month, day, hour, minute)));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        Collections.sort(listOfTasks);
         System.out.println(listOfTasks);
     }
-    public void writeToFile(){
+
+    public void writeToFile() {
         System.out.println("file with DataBase was updated");
+
+        File file = new File("src/package1/qweqwe1.txt");
+        file.delete();
+
+        try (FileWriter writer = new FileWriter("src/package1/qweqwe1.txt")) {
+            for (Task task : listOfTasks) {
+                writer.write(task.toStringFileFormat() + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
-    public void printNextTask(){
-        System.out.println("next task");
+    private Calendar createDateOfTask() {
+        Calendar gc = null;
+        while (true) {
+            String str = scan.nextLine();
+            if (str.equals("0")) {
+                return gc;
+            }
+            String[] input = str.split("[ :.]");
+
+            try {
+                int month = Integer.parseInt(input[0]);
+                int day = Integer.parseInt(input[1]);
+                int hour = Integer.parseInt(input[2]);
+                int minute = Integer.parseInt(input[3]);
+                if (month < 1 || month > 12 || day < 1 || day > 28 || hour < 0 || hour > 25 || minute < 0 || minute > 59 || input.length > 4)
+                    throw new NumberFormatException();
+                gc = new GregorianCalendar(2021, month, day, hour, minute);
+                break;
+            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                System.out.println("wrong input");
+            }
+
+        }
+        return gc;
     }
-    public void printTasksForToday(){
-        System.out.println("tasks for today");
+
+    public void printNextTask() {
+        System.out.println("next task is:");
+        for (Task task : listOfTasks) {
+            if (task.getCalendar().after(new GregorianCalendar())) {
+                System.out.println(task);
+                break;
+            }
+        }
+
     }
-    public void printAllTasks(){
-        System.out.println("all tasks");
-        loadFromFile();
+
+    public void printTasksForToday() {
+        System.out.println("tasks for today:");
+        for (Task task : listOfTasks) {
+            GregorianCalendar gc = new GregorianCalendar();
+            if (task.getCalendar().after(gc) &&
+                    task.getCalendar().get(Calendar.MONTH) == gc.get(Calendar.MONTH) &&
+                    task.getCalendar().get(Calendar.DATE) == gc.get(Calendar.DATE)) {
+
+                System.out.println(task);
+            }
+        }
     }
-    public void editTask(){
+
+    public void printAllTasks() {
+        System.out.println("all future tasks:");
+        for (Task task : listOfTasks) {
+            if (task.getCalendar().after(new GregorianCalendar())) {
+                System.out.println(task);
+            }
+        }
+    }
+
+    public void editTask() {
+        System.out.println("(type '0' to return to main menu)\n");
+        System.out.println("Type in description of task which you want to edit");
+        String str = scan.nextLine();
+        if (str.equals("0")) return;
+        for (Task task : listOfTasks) {
+            if (task.getInfo().equals(str)) {
+                System.out.println("Editing task: \n" + task);
+                System.out.println("Do you want to change date('1') or description('2') of task?");
+                String answer = scan.nextLine();
+                switch (answer) {
+                    case "1": {
+                        System.out.println("Type in new date and time of a task: mm.dd hh:mm");
+                        Calendar gc = createDateOfTask();
+                        if (gc == null) return;
+                        task.setCalendar(gc);
+                        break;
+                    }
+                    case "2": {
+                        System.out.println("Type in new task description");
+                        String info = scan.nextLine();
+                        task.setInfo(info);
+                        break;
+                    }
+                    case "0": {
+                        return;
+                    }
+                    default: {
+                        System.out.println("Wrong input");
+                    }
+                }
+            }
+        }
+
+        Collections.sort(listOfTasks);
         writeToFile();
         System.out.println("method editTask finished");
-        // "введите название таска"  (можно тоже в цикле чтоб было несколько попыток)
-        // "хотите изменить дату?" y/n
-        // "хотите изменить время?" y/n
-        // "хотите изменить название?" y/n
     }
-    public void addTask(){
+
+    public void addTask() {
+        System.out.println("(type '0' to return to main menu)\n");
+        System.out.println("Type in date and time of a task: mm.dd hh:mm");
+
+        Calendar gc = createDateOfTask();
+        if (gc == null) return;
+
+        System.out.println("Type in task description");
+        String info = scan.nextLine();
+        listOfTasks.add(new Task(info, gc));
+        Collections.sort(listOfTasks);
         writeToFile();
         System.out.println("method addTask finished");
-        // введите название таска
-        // введите дату таска
-        // введите время таска
-        // тут можно проверить что такой таск уже возможно есть в списке и сказать об этом
-        // плюс можно подсказать, нет ли уже тасков назначенных на это время
     }
-    public void deleteTask(){
+
+    public void deleteTask() {
+
+        System.out.println("Type in task description");
+        String str = scan.nextLine();
+        for (Task task : listOfTasks) {
+            if (task.getInfo().equals(str)) {
+                System.out.println("Are you sure that you want to delete this task:\n" + task + "\n y/n ?");
+                String answer = scan.nextLine();
+                switch (answer) {
+                    case "y": {
+                        listOfTasks.remove(task);
+                        break;
+                    }
+                    case "n": {
+                        break;
+                    }
+                    default: {
+                        System.out.println("Wrong input");
+                    }
+                }
+            }
+        }
         writeToFile();
         System.out.println("method deleteTask finished");
-        // "введите название таска"
-        // "вы действительно хотите удалить данный таск?" (вывести таск на экран)  y/n
     }
 
 }
