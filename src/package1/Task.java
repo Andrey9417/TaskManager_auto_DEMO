@@ -1,38 +1,51 @@
 package package1;
 
-public class Task {
+import java.util.Calendar;
 
-    private String name= "ads";
-    private int date = 24;
-    private int time = 11;
+public class Task implements Comparable<Task> {
 
-    public Task(String name, int date, int time) {
-        this.name = name;
-        this.date = date;
-        this.time = time;
+    private String info;
+    private Calendar calendar;
+
+    public Task(String info, Calendar calendar) {
+        this.info = info;
+        this.calendar = calendar;
     }
 
-    public String getName() {
-        return name;
+    public Calendar getCalendar() {
+        return calendar;
     }
 
-    public int getDate() {
-        return date;
+    public String getInfo() {
+        return info;
     }
 
-    public int getTime() {
-        return time;
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public void setCalendar(Calendar calendar) {
+        this.calendar = calendar;
     }
 
     @Override
     public String toString() {
-        return name + " " + date +" " + time;
+        return calendar.get(Calendar.MONTH) + "." + calendar.get(Calendar.DAY_OF_MONTH) + " " +
+                calendar.get(Calendar.HOUR_OF_DAY) + ":" + calendar.get(Calendar.MINUTE) +
+                "   Task description: \"" + info + "\"";
     }
-    /* Тут надо определиться с полями для объекта Task
-    *
-    * сделать геттеры сеттеры, какие нужно
-    *
-    * может чето еще добавить..
-    *
-    * */
+
+    public String toStringFileFormat() {
+        return calendar.get(Calendar.MONTH) + " " +
+                calendar.get(Calendar.DAY_OF_MONTH) + " " +
+                calendar.get(Calendar.HOUR_OF_DAY) + " " +
+                calendar.get(Calendar.MINUTE) + "\n" +
+                info;
+    }
+
+    @Override
+    public int compareTo(Task o) {
+        return this.calendar.compareTo(o.calendar);
+    }
+
 }
