@@ -116,7 +116,7 @@ public class InnerFunctions {
         System.out.println("(type '0' to return to main menu)\n");
 
         int index = printAllTasks();
-        System.out.println("Type in number of task, that you want to delete");
+        System.out.println("\nType in number of task, that you want to change");
         String str = scan.nextLine();
         if (str.equals("0")) return;
         int numberOfTaskToEdit;
@@ -185,7 +185,7 @@ public class InnerFunctions {
     public void deleteTask() {
 
         int index = printAllTasks();
-        System.out.println("Type in number of task, that you want to delete");
+        System.out.println("\nType in number of task, that you want to delete");
         String str = scan.nextLine();
         int numberOfTaskToDelete;
         try{
