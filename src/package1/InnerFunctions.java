@@ -68,7 +68,7 @@ public class InnerFunctions {
                 int minute = Integer.parseInt(input[3]);
                 if (month < 1 || month > 12 || day < 1 || day > 28 || hour < 0 || hour > 25 || minute < 0 || minute > 59 || input.length > 4)
                     throw new NumberFormatException();
-                gc = new GregorianCalendar(2021, month, day, hour, minute);
+                gc = new GregorianCalendar(2021, month-1, day, hour, minute);
                 break;
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("wrong input");
@@ -79,7 +79,6 @@ public class InnerFunctions {
     }
 
     public void printNextTask() {
-        System.out.println("next task is:");
         for (Task task : listOfTasks) {
             if (task.getCalendar().after(new GregorianCalendar())) {
                 System.out.println(task);
@@ -90,7 +89,6 @@ public class InnerFunctions {
     }
 
     public void printTasksForToday() {
-        System.out.println("tasks for today:");
         for (Task task : listOfTasks) {
             GregorianCalendar gc = new GregorianCalendar();
             if (task.getCalendar().after(gc) &&
@@ -102,22 +100,41 @@ public class InnerFunctions {
         }
     }
 
-    public void printAllTasks() {
-        System.out.println("all future tasks:");
+    public int printAllTasks() {
+        int index = 0;
         for (Task task : listOfTasks) {
             if (task.getCalendar().after(new GregorianCalendar())) {
-                System.out.println(task);
+                index++;
+                System.out.println(index + ") "+task);
+
             }
         }
+        return index;
     }
 
     public void editTask() {
         System.out.println("(type '0' to return to main menu)\n");
-        System.out.println("Type in description of task which you want to edit");
+
+        int index = printAllTasks();
+        System.out.println("Type in number of task, that you want to delete");
         String str = scan.nextLine();
         if (str.equals("0")) return;
+        int numberOfTaskToEdit;
+        try{
+            numberOfTaskToEdit = Integer.parseInt(str);
+            if(numberOfTaskToEdit <1 || numberOfTaskToEdit > index)
+                throw new NumberFormatException();
+        } catch (NumberFormatException e){
+            System.out.println("wrong input");
+            return;
+        }
+
+        index =0;
         for (Task task : listOfTasks) {
-            if (task.getInfo().equals(str)) {
+            if (task.getCalendar().after(new GregorianCalendar())) {
+                index++;
+            }
+            if (index == numberOfTaskToEdit) {
                 System.out.println("Editing task: \n" + task);
                 System.out.println("Do you want to change date('1') or description('2') of task?");
                 String answer = scan.nextLine();
@@ -167,15 +184,31 @@ public class InnerFunctions {
 
     public void deleteTask() {
 
-        System.out.println("Type in task description");
+        int index = printAllTasks();
+        System.out.println("Type in number of task, that you want to delete");
         String str = scan.nextLine();
+        int numberOfTaskToDelete;
+        try{
+            numberOfTaskToDelete = Integer.parseInt(str);
+            if(numberOfTaskToDelete <1 || numberOfTaskToDelete > index)
+                throw new NumberFormatException();
+            } catch (NumberFormatException e){
+            System.out.println("wrong input");
+            return;
+        }
+
+        index =0;
         for (Task task : listOfTasks) {
-            if (task.getInfo().equals(str)) {
+            if (task.getCalendar().after(new GregorianCalendar())) {
+                index++;
+            }
+            if (index == numberOfTaskToDelete) {
                 System.out.println("Are you sure that you want to delete this task:\n" + task + "\n y/n ?");
                 String answer = scan.nextLine();
                 switch (answer) {
                     case "y": {
                         listOfTasks.remove(task);
+                        writeToFile();
                         break;
                     }
                     case "n": {
@@ -187,7 +220,6 @@ public class InnerFunctions {
                 }
             }
         }
-        writeToFile();
         System.out.println("method deleteTask finished");
     }
 

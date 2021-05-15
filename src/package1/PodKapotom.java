@@ -22,14 +22,17 @@ public class PodKapotom {
             String str = scan.nextLine();
             switch (str) {
                 case "1": {
+                    System.out.println("next task is:");
                     functions.printNextTask();
                     break cycle;
                 }
                 case "2": {
+                    System.out.println("tasks for today:");
                     functions.printTasksForToday();
                     break cycle;
                 }
                 case "3": {
+                    System.out.println("all future tasks:");
                     functions.printAllTasks();
                     break cycle;
                 }
