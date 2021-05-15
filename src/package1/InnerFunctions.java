@@ -209,7 +209,7 @@ public class InnerFunctions {
                     case "y": {
                         listOfTasks.remove(task);
                         writeToFile();
-                        break;
+                        return;
                     }
                     case "n": {
                         break;
