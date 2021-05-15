@@ -68,7 +68,7 @@ public class InnerFunctions {
                 int minute = Integer.parseInt(input[3]);
                 if (month < 1 || month > 12 || day < 1 || day > 28 || hour < 0 || hour > 25 || minute < 0 || minute > 59 || input.length > 4)
                     throw new NumberFormatException();
-                gc = new GregorianCalendar(2021, month, day, hour, minute);
+                gc = new GregorianCalendar(2021, month-1, day, hour, minute);
                 break;
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 System.out.println("wrong input");
