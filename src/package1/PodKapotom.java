@@ -14,9 +14,9 @@ public class PodKapotom {
     Scanner scan = new Scanner(System.in);
 
     public void showTask() {
-        System.out.println("\n\nЗапущен метод showTask");
-        System.out.println("type:\n 1 for next task;\n 2 for tasks for today;" +
-                "\n 3 for all tasks;\n 0 - return to main menu");
+        System.out.println("The method of displaying tasks has been launched");
+        System.out.println("Choose number:\n 1 - for show the next task;\n 2 - for show the tasks for today;" +
+                "\n 3 - for show all tasks;\n 0 - return to main menu");
         cycle:
         while (true) {
             String str = scan.nextLine();
@@ -37,25 +37,25 @@ public class PodKapotom {
                     break cycle;
                 }
                 default: {
-                    System.out.println("wrong");
+                    System.out.println("Wrong, try again please");
                 }
             }
         }
     }
 
     public void editTask() {
-        System.out.println("\n\nЗапущен метод editTask");
+        System.out.println("\nThe method of editing tasks has been launched");
         functions.editTask();
     }
 
     public void addTask() {
-        System.out.println("\n\nЗапущен метод addTask");
+        System.out.println("\nThe method of add tasks has been launched");
         functions.addTask();
 
     }
 
     public void deleteTask() {
-        System.out.println("\n\nЗапущен метод deleteTask");
+        System.out.println("\nThe method of delete tasks has been launched");
         functions.deleteTask();
     }
 }

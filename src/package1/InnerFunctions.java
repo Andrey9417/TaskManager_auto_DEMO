@@ -71,7 +71,7 @@ public class InnerFunctions {
                 gc = new GregorianCalendar(2021, month-1, day, hour, minute);
                 break;
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                System.out.println("wrong input");
+                System.out.println("Wrong, try again please");
             }
 
         }
