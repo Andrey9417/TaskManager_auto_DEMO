@@ -37,13 +37,15 @@ public class PodKapotom {
                     break cycle;
                 }
                 case "0": {
-                    break cycle;
+                    return;
                 }
                 default: {
                     System.out.println("Wrong, try again please");
                 }
             }
         }
+        System.out.println("Type smth to return to main menu");
+        String str = scan.nextLine();
     }
 
     public void editTask() {
