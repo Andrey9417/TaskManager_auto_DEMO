@@ -193,7 +193,7 @@ public class InnerFunctions {
             if(numberOfTaskToDelete <1 || numberOfTaskToDelete > index)
                 throw new NumberFormatException();
             } catch (NumberFormatException e){
-            System.out.println("wrong input");
+            System.out.println("Wrong input");
             return;
         }
 
@@ -209,7 +209,7 @@ public class InnerFunctions {
                     case "y": {
                         listOfTasks.remove(task);
                         writeToFile();
-                        break;
+                        return;
                     }
                     case "n": {
                         break;
