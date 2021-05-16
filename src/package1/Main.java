@@ -34,6 +34,15 @@ public class Main {
                     // вызов метода deleteTask
                     break;
                 }
+                case "5": {
+                    AppOpen q = new AppOpen();
+                    q.appOpenMethod();
+                    break;
+                }
+                case "6": {
+                    Alarm.main();
+                    break;
+                }
                 case "exit": {
                     return;
                 }
@@ -53,6 +62,8 @@ public class Main {
         System.out.println("Enter '2' for add tasks");
         System.out.println("Enter '3' for edit tasks");
         System.out.println("Enter '4' for delete tasks");
+        System.out.println("Enter '5' for open another app");
+        System.out.println("Enter '6' for add pop-up notification");
         System.out.println("Write 'exit' to turn off app");
         //Тут вывод строк главного меню с вариантами действий
     }

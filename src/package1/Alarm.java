@@ -29,7 +29,7 @@ public class Alarm {
         t.start();
     }
 
-    public static void main(String[] ar) {
+    public static void main() {
 
         Scanner sr = new Scanner(System.in);
         System.out.println("Write message");
