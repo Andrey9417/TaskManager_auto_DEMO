@@ -6,7 +6,6 @@ import javax.swing.JOptionPane;
 
 public class Alarm {
     Thread t;
-    int str = 0;
 
     public void checkAlarm(int h, int m, int s, String str) {
         final int a = h, b = m, c = s;
@@ -29,7 +28,7 @@ public class Alarm {
         t.start();
     }
 
-    public static void main() {
+    public void alarmSet() {
 
         Scanner sr = new Scanner(System.in);
         System.out.println("Write message");

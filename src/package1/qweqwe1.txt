@@ -32,8 +32,6 @@ new text
 egergrege
 5 14 10 29
 taskname9
-5 15 13 50
-something
 6 23 23 23
 normal description
 8 13 13 13

@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        Alarm w = new Alarm();
         PodKapotom podKapotom = new PodKapotom(new InnerFunctions());
         System.out.println("\nHello dear friend, I am a console task manager.\n" +
                 "Hope you will enjoy using this app.");
@@ -40,7 +41,7 @@ public class Main {
                     break;
                 }
                 case "6": {
-                    Alarm.main();
+                    w.alarmSet();
                     break;
                 }
                 case "exit": {
