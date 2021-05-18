@@ -34,8 +34,6 @@ egergrege
 taskname9
 6 23 23 23
 normal description
-8 13 13 13
-ertgfd
 10 13 13 13
 asdasfwef
 11 12 12 12
